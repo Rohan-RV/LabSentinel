@@ -1,0 +1,866 @@
+{
+  "feature_order": [
+    "air_temperature",
+    "process_temperature",
+    "rotational_speed",
+    "torque",
+    "tool_wear"
+  ],
+  "feature_units": {
+    "air_temperature": "K",
+    "process_temperature": "K",
+    "rotational_speed": "rpm",
+    "torque": "Nm",
+    "tool_wear": "min"
+  },
+  "device_types": {
+    "Ventilator": {
+      "criticality": 5,
+      "reports": [
+        "process_temperature",
+        "rotational_speed",
+        "torque"
+      ],
+      "normal": {
+        "process_temperature": {
+          "mean": 308.5,
+          "std": 0.6
+        },
+        "rotational_speed": {
+          "mean": 1500,
+          "std": 55
+        },
+        "torque": {
+          "mean": 42,
+          "std": 4
+        }
+      },
+      "failure_mode": "Power failure (torque/speed out of range)",
+      "failure_targets": {
+        "process_temperature": 311.0,
+        "rotational_speed": 2560,
+        "torque": 73
+      }
+    },
+    "MRI Scanner": {
+      "criticality": 4,
+      "reports": [
+        "air_temperature",
+        "process_temperature",
+        "rotational_speed"
+      ],
+      "normal": {
+        "air_temperature": {
+          "mean": 298.5,
+          "std": 1.0
+        },
+        "process_temperature": {
+          "mean": 308.8,
+          "std": 0.7
+        },
+        "rotational_speed": {
+          "mean": 1600,
+          "std": 70
+        }
+      },
+      "failure_mode": "Heat-dissipation failure (small air/process gap, low speed)",
+      "failure_targets": {
+        "air_temperature": 303.5,
+        "process_temperature": 311.0,
+        "rotational_speed": 1170
+      }
+    },
+    "Infusion Pump": {
+      "criticality": 4,
+      "reports": [
+        "rotational_speed",
+        "torque"
+      ],
+      "normal": {
+        "rotational_speed": {
+          "mean": 1450,
+          "std": 45
+        },
+        "torque": {
+          "mean": 38,
+          "std": 4
+        }
+      },
+      "failure_mode": "Power failure (torque/speed out of range)",
+      "failure_targets": {
+        "rotational_speed": 2560,
+        "torque": 73
+      }
+    },
+    "ECG Machine": {
+      "criticality": 2,
+      "reports": [
+        "process_temperature"
+      ],
+      "normal": {
+        "process_temperature": {
+          "mean": 308.2,
+          "std": 0.5
+        }
+      },
+      "failure_mode": "Process over-temperature (safe-envelope breach)",
+      "failure_targets": {
+        "process_temperature": 319.0
+      }
+    },
+    "Centrifuge": {
+      "criticality": 3,
+      "reports": [
+        "rotational_speed",
+        "torque",
+        "tool_wear"
+      ],
+      "normal": {
+        "rotational_speed": {
+          "mean": 2350,
+          "std": 70
+        },
+        "torque": {
+          "mean": 44,
+          "std": 4
+        },
+        "tool_wear": {
+          "mean": 90,
+          "std": 0,
+          "accumulates": true
+        }
+      },
+      "failure_mode": "Overstrain (high tool wear x torque)",
+      "failure_targets": {
+        "rotational_speed": 1380,
+        "torque": 73,
+        "tool_wear": 242
+      }
+    },
+    "Spectrometer": {
+      "criticality": 3,
+      "reports": [
+        "air_temperature",
+        "process_temperature"
+      ],
+      "normal": {
+        "air_temperature": {
+          "mean": 298.6,
+          "std": 0.8
+        },
+        "process_temperature": {
+          "mean": 308.6,
+          "std": 0.6
+        }
+      },
+      "failure_mode": "Process over-temperature (safe-envelope breach)",
+      "failure_targets": {
+        "air_temperature": 306.0,
+        "process_temperature": 319.0
+      }
+    },
+    "PCR Thermocycler": {
+      "criticality": 3,
+      "reports": [
+        "air_temperature",
+        "process_temperature",
+        "tool_wear"
+      ],
+      "normal": {
+        "air_temperature": {
+          "mean": 298.4,
+          "std": 1.2
+        },
+        "process_temperature": {
+          "mean": 309.0,
+          "std": 0.8
+        },
+        "tool_wear": {
+          "mean": 70,
+          "std": 0,
+          "accumulates": true
+        }
+      },
+      "failure_mode": "Thermal block over-temperature + high tool wear",
+      "failure_targets": {
+        "air_temperature": 305.0,
+        "process_temperature": 319.5,
+        "tool_wear": 250
+      }
+    },
+    "HPLC Chromatograph": {
+      "criticality": 3,
+      "reports": [
+        "process_temperature",
+        "rotational_speed",
+        "torque"
+      ],
+      "normal": {
+        "process_temperature": {
+          "mean": 308.7,
+          "std": 0.6
+        },
+        "rotational_speed": {
+          "mean": 1700,
+          "std": 60
+        },
+        "torque": {
+          "mean": 40,
+          "std": 4
+        }
+      },
+      "failure_mode": "Power failure (torque/speed out of range)",
+      "failure_targets": {
+        "process_temperature": 311.0,
+        "rotational_speed": 2560,
+        "torque": 73
+      }
+    }
+  },
+  "instances": [
+    {
+      "id": "VENT-01",
+      "type": "Ventilator",
+      "criticality": 5,
+      "reports": [
+        "process_temperature",
+        "rotational_speed",
+        "torque"
+      ],
+      "baselines": {
+        "process_temperature": 309.36,
+        "rotational_speed": 1447.75,
+        "torque": 40.2
+      },
+      "active_dependents": 3,
+      "backup_available": false,
+      "location": "ICU-A"
+    },
+    {
+      "id": "VENT-02",
+      "type": "Ventilator",
+      "criticality": 5,
+      "reports": [
+        "process_temperature",
+        "rotational_speed",
+        "torque"
+      ],
+      "baselines": {
+        "process_temperature": 306.05,
+        "rotational_speed": 1526.47,
+        "torque": 42.36
+      },
+      "active_dependents": 3,
+      "backup_available": true,
+      "location": "ICU-B"
+    },
+    {
+      "id": "VENT-03",
+      "type": "Ventilator",
+      "criticality": 5,
+      "reports": [
+        "process_temperature",
+        "rotational_speed",
+        "torque"
+      ],
+      "baselines": {
+        "process_temperature": 305.99,
+        "rotational_speed": 1470.59,
+        "torque": 42.82
+      },
+      "active_dependents": 1,
+      "backup_available": false,
+      "location": "ER"
+    },
+    {
+      "id": "VENT-04",
+      "type": "Ventilator",
+      "criticality": 5,
+      "reports": [
+        "process_temperature",
+        "rotational_speed",
+        "torque"
+      ],
+      "baselines": {
+        "process_temperature": 309.74,
+        "rotational_speed": 1491.15,
+        "torque": 41.59
+      },
+      "active_dependents": 2,
+      "backup_available": false,
+      "location": "COVID Ward"
+    },
+    {
+      "id": "VENT-05",
+      "type": "Ventilator",
+      "criticality": 5,
+      "reports": [
+        "process_temperature",
+        "rotational_speed",
+        "torque"
+      ],
+      "baselines": {
+        "process_temperature": 305.46,
+        "rotational_speed": 1533.64,
+        "torque": 43.59
+      },
+      "active_dependents": 2,
+      "backup_available": true,
+      "location": "Recovery"
+    },
+    {
+      "id": "VENT-06",
+      "type": "Ventilator",
+      "criticality": 5,
+      "reports": [
+        "process_temperature",
+        "rotational_speed",
+        "torque"
+      ],
+      "baselines": {
+        "process_temperature": 306.74,
+        "rotational_speed": 1528.98,
+        "torque": 38.82
+      },
+      "active_dependents": 3,
+      "backup_available": true,
+      "location": "ICU-C"
+    },
+    {
+      "id": "MRI-01",
+      "type": "MRI Scanner",
+      "criticality": 4,
+      "reports": [
+        "air_temperature",
+        "process_temperature",
+        "rotational_speed"
+      ],
+      "baselines": {
+        "air_temperature": 300.57,
+        "process_temperature": 309.44,
+        "rotational_speed": 1643.0
+      },
+      "active_dependents": 3,
+      "backup_available": false,
+      "location": "Radiology-1"
+    },
+    {
+      "id": "MRI-02",
+      "type": "MRI Scanner",
+      "criticality": 4,
+      "reports": [
+        "air_temperature",
+        "process_temperature",
+        "rotational_speed"
+      ],
+      "baselines": {
+        "air_temperature": 301.32,
+        "process_temperature": 308.05,
+        "rotational_speed": 1607.29
+      },
+      "active_dependents": 2,
+      "backup_available": false,
+      "location": "Radiology-2"
+    },
+    {
+      "id": "MRI-03",
+      "type": "MRI Scanner",
+      "criticality": 4,
+      "reports": [
+        "air_temperature",
+        "process_temperature",
+        "rotational_speed"
+      ],
+      "baselines": {
+        "air_temperature": 299.72,
+        "process_temperature": 306.0,
+        "rotational_speed": 1561.91
+      },
+      "active_dependents": 2,
+      "backup_available": false,
+      "location": "Neuro Imaging"
+    },
+    {
+      "id": "MRI-04",
+      "type": "MRI Scanner",
+      "criticality": 4,
+      "reports": [
+        "air_temperature",
+        "process_temperature",
+        "rotational_speed"
+      ],
+      "baselines": {
+        "air_temperature": 300.62,
+        "process_temperature": 311.06,
+        "rotational_speed": 1583.22
+      },
+      "active_dependents": 3,
+      "backup_available": false,
+      "location": "Outpatient"
+    },
+    {
+      "id": "PUMP-01",
+      "type": "Infusion Pump",
+      "criticality": 4,
+      "reports": [
+        "rotational_speed",
+        "torque"
+      ],
+      "baselines": {
+        "rotational_speed": 1437.83,
+        "torque": 36.96
+      },
+      "active_dependents": 1,
+      "backup_available": false,
+      "location": "Oncology"
+    },
+    {
+      "id": "PUMP-02",
+      "type": "Infusion Pump",
+      "criticality": 4,
+      "reports": [
+        "rotational_speed",
+        "torque"
+      ],
+      "baselines": {
+        "rotational_speed": 1468.16,
+        "torque": 39.47
+      },
+      "active_dependents": 0,
+      "backup_available": false,
+      "location": "ICU-A"
+    },
+    {
+      "id": "PUMP-03",
+      "type": "Infusion Pump",
+      "criticality": 4,
+      "reports": [
+        "rotational_speed",
+        "torque"
+      ],
+      "baselines": {
+        "rotational_speed": 1420.4,
+        "torque": 39.83
+      },
+      "active_dependents": 1,
+      "backup_available": false,
+      "location": "Pediatrics"
+    },
+    {
+      "id": "PUMP-04",
+      "type": "Infusion Pump",
+      "criticality": 4,
+      "reports": [
+        "rotational_speed",
+        "torque"
+      ],
+      "baselines": {
+        "rotational_speed": 1429.3,
+        "torque": 41.4
+      },
+      "active_dependents": 1,
+      "backup_available": false,
+      "location": "ER"
+    },
+    {
+      "id": "PUMP-05",
+      "type": "Infusion Pump",
+      "criticality": 4,
+      "reports": [
+        "rotational_speed",
+        "torque"
+      ],
+      "baselines": {
+        "rotational_speed": 1480.86,
+        "torque": 40.21
+      },
+      "active_dependents": 1,
+      "backup_available": false,
+      "location": "Surgery"
+    },
+    {
+      "id": "PUMP-06",
+      "type": "Infusion Pump",
+      "criticality": 4,
+      "reports": [
+        "rotational_speed",
+        "torque"
+      ],
+      "baselines": {
+        "rotational_speed": 1477.45,
+        "torque": 37.21
+      },
+      "active_dependents": 0,
+      "backup_available": true,
+      "location": "Ward-3"
+    },
+    {
+      "id": "ECG-01",
+      "type": "ECG Machine",
+      "criticality": 2,
+      "reports": [
+        "process_temperature"
+      ],
+      "baselines": {
+        "process_temperature": 310.93
+      },
+      "active_dependents": 2,
+      "backup_available": true,
+      "location": "Cardiology"
+    },
+    {
+      "id": "ECG-02",
+      "type": "ECG Machine",
+      "criticality": 2,
+      "reports": [
+        "process_temperature"
+      ],
+      "baselines": {
+        "process_temperature": 308.2
+      },
+      "active_dependents": 3,
+      "backup_available": true,
+      "location": "ER"
+    },
+    {
+      "id": "ECG-03",
+      "type": "ECG Machine",
+      "criticality": 2,
+      "reports": [
+        "process_temperature"
+      ],
+      "baselines": {
+        "process_temperature": 305.98
+      },
+      "active_dependents": 4,
+      "backup_available": true,
+      "location": "ICU-B"
+    },
+    {
+      "id": "ECG-04",
+      "type": "ECG Machine",
+      "criticality": 2,
+      "reports": [
+        "process_temperature"
+      ],
+      "baselines": {
+        "process_temperature": 309.72
+      },
+      "active_dependents": 3,
+      "backup_available": false,
+      "location": "Outpatient"
+    },
+    {
+      "id": "ECG-05",
+      "type": "ECG Machine",
+      "criticality": 2,
+      "reports": [
+        "process_temperature"
+      ],
+      "baselines": {
+        "process_temperature": 307.58
+      },
+      "active_dependents": 1,
+      "backup_available": false,
+      "location": "Ward-2"
+    },
+    {
+      "id": "CENT-01",
+      "type": "Centrifuge",
+      "criticality": 3,
+      "reports": [
+        "rotational_speed",
+        "torque",
+        "tool_wear"
+      ],
+      "baselines": {
+        "rotational_speed": 2299.37,
+        "torque": 43.95,
+        "tool_wear": 103.1
+      },
+      "active_dependents": 4,
+      "backup_available": false,
+      "location": "Lab-Hematology"
+    },
+    {
+      "id": "CENT-02",
+      "type": "Centrifuge",
+      "criticality": 3,
+      "reports": [
+        "rotational_speed",
+        "torque",
+        "tool_wear"
+      ],
+      "baselines": {
+        "rotational_speed": 2302.4,
+        "torque": 45.44,
+        "tool_wear": 85.6
+      },
+      "active_dependents": 3,
+      "backup_available": true,
+      "location": "Lab-Chem"
+    },
+    {
+      "id": "CENT-03",
+      "type": "Centrifuge",
+      "criticality": 3,
+      "reports": [
+        "rotational_speed",
+        "torque",
+        "tool_wear"
+      ],
+      "baselines": {
+        "rotational_speed": 2419.46,
+        "torque": 44.23,
+        "tool_wear": 126.8
+      },
+      "active_dependents": 0,
+      "backup_available": false,
+      "location": "Blood Bank"
+    },
+    {
+      "id": "CENT-04",
+      "type": "Centrifuge",
+      "criticality": 3,
+      "reports": [
+        "rotational_speed",
+        "torque",
+        "tool_wear"
+      ],
+      "baselines": {
+        "rotational_speed": 2296.04,
+        "torque": 47.08,
+        "tool_wear": 102.6
+      },
+      "active_dependents": 5,
+      "backup_available": true,
+      "location": "Research-1"
+    },
+    {
+      "id": "CENT-05",
+      "type": "Centrifuge",
+      "criticality": 3,
+      "reports": [
+        "rotational_speed",
+        "torque",
+        "tool_wear"
+      ],
+      "baselines": {
+        "rotational_speed": 2321.09,
+        "torque": 41.27,
+        "tool_wear": 20.4
+      },
+      "active_dependents": 5,
+      "backup_available": false,
+      "location": "Research-2"
+    },
+    {
+      "id": "SPEC-01",
+      "type": "Spectrometer",
+      "criticality": 3,
+      "reports": [
+        "air_temperature",
+        "process_temperature"
+      ],
+      "baselines": {
+        "air_temperature": 297.19,
+        "process_temperature": 308.6
+      },
+      "active_dependents": 1,
+      "backup_available": true,
+      "location": "Lab-Chem"
+    },
+    {
+      "id": "SPEC-02",
+      "type": "Spectrometer",
+      "criticality": 3,
+      "reports": [
+        "air_temperature",
+        "process_temperature"
+      ],
+      "baselines": {
+        "air_temperature": 296.25,
+        "process_temperature": 309.37
+      },
+      "active_dependents": 5,
+      "backup_available": true,
+      "location": "Toxicology"
+    },
+    {
+      "id": "SPEC-03",
+      "type": "Spectrometer",
+      "criticality": 3,
+      "reports": [
+        "air_temperature",
+        "process_temperature"
+      ],
+      "baselines": {
+        "air_temperature": 296.8,
+        "process_temperature": 307.82
+      },
+      "active_dependents": 1,
+      "backup_available": true,
+      "location": "Research-1"
+    },
+    {
+      "id": "SPEC-04",
+      "type": "Spectrometer",
+      "criticality": 3,
+      "reports": [
+        "air_temperature",
+        "process_temperature"
+      ],
+      "baselines": {
+        "air_temperature": 300.26,
+        "process_temperature": 308.79
+      },
+      "active_dependents": 0,
+      "backup_available": true,
+      "location": "Pharmacy"
+    },
+    {
+      "id": "PCR-01",
+      "type": "PCR Thermocycler",
+      "criticality": 3,
+      "reports": [
+        "air_temperature",
+        "process_temperature",
+        "tool_wear"
+      ],
+      "baselines": {
+        "air_temperature": 298.33,
+        "process_temperature": 306.6,
+        "tool_wear": 52.7
+      },
+      "active_dependents": 2,
+      "backup_available": true,
+      "location": "Microbiology"
+    },
+    {
+      "id": "PCR-02",
+      "type": "PCR Thermocycler",
+      "criticality": 3,
+      "reports": [
+        "air_temperature",
+        "process_temperature",
+        "tool_wear"
+      ],
+      "baselines": {
+        "air_temperature": 296.85,
+        "process_temperature": 309.42,
+        "tool_wear": 27.1
+      },
+      "active_dependents": 5,
+      "backup_available": true,
+      "location": "Genomics"
+    },
+    {
+      "id": "PCR-03",
+      "type": "PCR Thermocycler",
+      "criticality": 3,
+      "reports": [
+        "air_temperature",
+        "process_temperature",
+        "tool_wear"
+      ],
+      "baselines": {
+        "air_temperature": 295.83,
+        "process_temperature": 310.61,
+        "tool_wear": 88.9
+      },
+      "active_dependents": 1,
+      "backup_available": false,
+      "location": "Research-2"
+    },
+    {
+      "id": "PCR-04",
+      "type": "PCR Thermocycler",
+      "criticality": 3,
+      "reports": [
+        "air_temperature",
+        "process_temperature",
+        "tool_wear"
+      ],
+      "baselines": {
+        "air_temperature": 301.07,
+        "process_temperature": 306.93,
+        "tool_wear": 67.5
+      },
+      "active_dependents": 4,
+      "backup_available": true,
+      "location": "Virology"
+    },
+    {
+      "id": "HPLC-01",
+      "type": "HPLC Chromatograph",
+      "criticality": 3,
+      "reports": [
+        "process_temperature",
+        "rotational_speed",
+        "torque"
+      ],
+      "baselines": {
+        "process_temperature": 306.92,
+        "rotational_speed": 1704.72,
+        "torque": 41.84
+      },
+      "active_dependents": 1,
+      "backup_available": false,
+      "location": "Lab-Chem"
+    },
+    {
+      "id": "HPLC-02",
+      "type": "HPLC Chromatograph",
+      "criticality": 3,
+      "reports": [
+        "process_temperature",
+        "rotational_speed",
+        "torque"
+      ],
+      "baselines": {
+        "process_temperature": 308.08,
+        "rotational_speed": 1720.6,
+        "torque": 38.99
+      },
+      "active_dependents": 4,
+      "backup_available": true,
+      "location": "Pharmacology"
+    },
+    {
+      "id": "HPLC-03",
+      "type": "HPLC Chromatograph",
+      "criticality": 3,
+      "reports": [
+        "process_temperature",
+        "rotational_speed",
+        "torque"
+      ],
+      "baselines": {
+        "process_temperature": 307.14,
+        "rotational_speed": 1647.68,
+        "torque": 36.17
+      },
+      "active_dependents": 4,
+      "backup_available": true,
+      "location": "Toxicology"
+    },
+    {
+      "id": "HPLC-04",
+      "type": "HPLC Chromatograph",
+      "criticality": 3,
+      "reports": [
+        "process_temperature",
+        "rotational_speed",
+        "torque"
+      ],
+      "baselines": {
+        "process_temperature": 306.97,
+        "rotational_speed": 1648.52,
+        "torque": 41.05
+      },
+      "active_dependents": 1,
+      "backup_available": true,
+      "location": "QC Lab"
+    }
+  ]
+}

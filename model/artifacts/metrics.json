@@ -1,0 +1,34 @@
+{
+  "dataset": "AI4I 2020 Predictive Maintenance (UCI id=601)",
+  "model": "XGBoost classifier (max_depth=5, n_estimators=200), trained with fleet-subset missing-value augmentation",
+  "n_samples": 10000,
+  "n_failures": 339,
+  "failure_rate": 0.0339,
+  "scale_pos_weight": 28.499,
+  "threshold": 0.5,
+  "failure_class": {
+    "precision": 0.6625,
+    "recall": 0.7794,
+    "f1": 0.7162,
+    "pr_auc": 0.8102,
+    "roc_auc": 0.9698
+  },
+  "failure_class_realistic_subset": {
+    "precision": 0.9167,
+    "recall": 0.1618,
+    "f1": 0.275,
+    "pr_auc": 0.2754,
+    "roc_auc": 0.7151
+  },
+  "confusion_matrix": [
+    [
+      1905,
+      27
+    ],
+    [
+      15,
+      53
+    ]
+  ],
+  "note": "Metrics are on the held-out FAILURE class - accuracy is omitted on purpose because the data is highly imbalanced (~3.4% failures). 'failure_class' uses all 5 sensors; 'failure_class_realistic_subset' scores each test row through the device sensor subsets the fleet actually reports (missing sensors as null)."
+}

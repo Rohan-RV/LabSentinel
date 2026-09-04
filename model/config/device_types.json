@@ -1,0 +1,112 @@
+{
+  "feature_order": [
+    "air_temperature",
+    "process_temperature",
+    "rotational_speed",
+    "torque",
+    "tool_wear"
+  ],
+  "feature_units": {
+    "air_temperature": "K",
+    "process_temperature": "K",
+    "rotational_speed": "rpm",
+    "torque": "Nm",
+    "tool_wear": "min"
+  },
+  "device_types": {
+    "Ventilator": {
+      "criticality": 5,
+      "reports": ["process_temperature", "rotational_speed", "torque"],
+      "normal": {
+        "process_temperature": { "mean": 308.5, "std": 0.6 },
+        "rotational_speed": { "mean": 1500, "std": 55 },
+        "torque": { "mean": 42, "std": 4 }
+      },
+      "failure_mode": "Power failure (torque/speed out of range)",
+      "failure_targets": { "process_temperature": 311.0, "rotational_speed": 2560, "torque": 73 }
+    },
+    "MRI Scanner": {
+      "criticality": 4,
+      "reports": ["air_temperature", "process_temperature", "rotational_speed"],
+      "normal": {
+        "air_temperature": { "mean": 298.5, "std": 1.0 },
+        "process_temperature": { "mean": 308.8, "std": 0.7 },
+        "rotational_speed": { "mean": 1600, "std": 70 }
+      },
+      "failure_mode": "Heat-dissipation failure (small air/process gap, low speed)",
+      "failure_targets": { "air_temperature": 303.5, "process_temperature": 311.0, "rotational_speed": 1170 }
+    },
+    "Infusion Pump": {
+      "criticality": 4,
+      "reports": ["rotational_speed", "torque"],
+      "normal": {
+        "rotational_speed": { "mean": 1450, "std": 45 },
+        "torque": { "mean": 38, "std": 4 }
+      },
+      "failure_mode": "Power failure (torque/speed out of range)",
+      "failure_targets": { "rotational_speed": 2560, "torque": 73 }
+    },
+    "ECG Machine": {
+      "criticality": 2,
+      "reports": ["process_temperature"],
+      "normal": {
+        "process_temperature": { "mean": 308.2, "std": 0.5 }
+      },
+      "failure_mode": "Process over-temperature (safe-envelope breach)",
+      "failure_targets": { "process_temperature": 319.0 }
+    },
+    "Centrifuge": {
+      "criticality": 3,
+      "reports": ["rotational_speed", "torque", "tool_wear"],
+      "normal": {
+        "rotational_speed": { "mean": 2350, "std": 70 },
+        "torque": { "mean": 44, "std": 4 },
+        "tool_wear": { "mean": 90, "std": 0, "accumulates": true }
+      },
+      "failure_mode": "Overstrain (high tool wear x torque)",
+      "failure_targets": { "rotational_speed": 1380, "torque": 73, "tool_wear": 242 }
+    },
+    "Spectrometer": {
+      "criticality": 3,
+      "reports": ["air_temperature", "process_temperature"],
+      "normal": {
+        "air_temperature": { "mean": 298.6, "std": 0.8 },
+        "process_temperature": { "mean": 308.6, "std": 0.6 }
+      },
+      "failure_mode": "Process over-temperature (safe-envelope breach)",
+      "failure_targets": { "air_temperature": 306.0, "process_temperature": 319.0 }
+    },
+    "PCR Thermocycler": {
+      "criticality": 3,
+      "reports": ["air_temperature", "process_temperature", "tool_wear"],
+      "normal": {
+        "air_temperature": { "mean": 298.4, "std": 1.2 },
+        "process_temperature": { "mean": 309.0, "std": 0.8 },
+        "tool_wear": { "mean": 70, "std": 0, "accumulates": true }
+      },
+      "failure_mode": "Thermal block over-temperature + high tool wear",
+      "failure_targets": { "air_temperature": 305.0, "process_temperature": 319.5, "tool_wear": 250 }
+    },
+    "HPLC Chromatograph": {
+      "criticality": 3,
+      "reports": ["process_temperature", "rotational_speed", "torque"],
+      "normal": {
+        "process_temperature": { "mean": 308.7, "std": 0.6 },
+        "rotational_speed": { "mean": 1700, "std": 60 },
+        "torque": { "mean": 40, "std": 4 }
+      },
+      "failure_mode": "Power failure (torque/speed out of range)",
+      "failure_targets": { "process_temperature": 311.0, "rotational_speed": 2560, "torque": 73 }
+    }
+  },
+  "fleet": [
+    { "type": "Ventilator", "count": 6 },
+    { "type": "MRI Scanner", "count": 4 },
+    { "type": "Infusion Pump", "count": 6 },
+    { "type": "ECG Machine", "count": 5 },
+    { "type": "Centrifuge", "count": 5 },
+    { "type": "Spectrometer", "count": 4 },
+    { "type": "PCR Thermocycler", "count": 4 },
+    { "type": "HPLC Chromatograph", "count": 4 }
+  ]
+}

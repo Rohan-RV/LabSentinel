@@ -1,0 +1,55 @@
+{
+  "dataset": "NASA C-MAPSS FD001 (turbofan run-to-failure, 100 train / 100 test engines)",
+  "model": "XGBoost regressor (max_depth=5, n_estimators=300), piecewise-linear RUL cap 125",
+  "task": "Remaining Useful Life regression (cycles)",
+  "n_train_units": 100,
+  "n_test_units": 100,
+  "rul_cap": 125,
+  "rmse": 18.89,
+  "mae": 13.58,
+  "r2": 0.793,
+  "nasa_score": 1187.4,
+  "samples": [
+    {
+      "unit": 9,
+      "predicted": 111.1,
+      "actual": 111
+    },
+    {
+      "unit": 43,
+      "predicted": 94.6,
+      "actual": 59
+    },
+    {
+      "unit": 63,
+      "predicted": 69.4,
+      "actual": 72
+    },
+    {
+      "unit": 70,
+      "predicted": 100.3,
+      "actual": 94
+    },
+    {
+      "unit": 73,
+      "predicted": 110.7,
+      "actual": 131
+    },
+    {
+      "unit": 85,
+      "predicted": 108.1,
+      "actual": 118
+    },
+    {
+      "unit": 97,
+      "predicted": 84.7,
+      "actual": 82
+    },
+    {
+      "unit": 99,
+      "predicted": 122.4,
+      "actual": 117
+    }
+  ],
+  "note": "RMSE and the NASA asymmetric score are computed on the last observed cycle of each held-out test engine against the provided true RUL. This is a real RUL benchmark; the live fleet shows an estimated time-to-failure projected from each device's risk trend."
+}

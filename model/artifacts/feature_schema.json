@@ -1,0 +1,23 @@
+{
+  "feature_order": [
+    "air_temperature",
+    "process_temperature",
+    "rotational_speed",
+    "torque",
+    "tool_wear"
+  ],
+  "feature_importances": {
+    "air_temperature": 0.1096,
+    "process_temperature": 0.0776,
+    "rotational_speed": 0.29,
+    "torque": 0.3033,
+    "tool_wear": 0.2195
+  },
+  "impute_medians": {
+    "air_temperature": 300.1,
+    "process_temperature": 310.1,
+    "rotational_speed": 1503.0,
+    "torque": 40.1,
+    "tool_wear": 107.0
+  }
+}
