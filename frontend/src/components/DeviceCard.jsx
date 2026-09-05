@@ -7,7 +7,7 @@ function HealthRing({ value, status }) {
   const color = STATUS[status].ring;
   return (
     <svg width="60" height="60" viewBox="0 0 60 60" className="shrink-0">
-      <circle cx="30" cy="30" r={r} fill="none" stroke="#2a3550" strokeWidth="6" />
+      <circle cx="30" cy="30" r={r} fill="none" style={{ stroke: "var(--ring-track)" }} strokeWidth="6" />
       <circle
         cx="30"
         cy="30"
@@ -21,7 +21,7 @@ function HealthRing({ value, status }) {
         transform="rotate(-90 30 30)"
         style={{ transition: "stroke-dashoffset 0.7s ease, stroke 0.4s" }}
       />
-      <text x="30" y="34" textAnchor="middle" fontSize="15" fontWeight="700" fill="#e5e9f0">
+      <text x="30" y="34" textAnchor="middle" fontSize="15" fontWeight="700" style={{ fill: "var(--text)" }}>
         {value}
       </text>
     </svg>
@@ -39,8 +39,8 @@ export default function DeviceCard({ device, onOpen }) {
   return (
     <button
       onClick={() => onOpen(device.id)}
-      className={`group relative flex w-full items-center gap-3 rounded-xl border px-3 py-3 text-left transition
-        ${crit ? "border-critical/60 bg-critical/5 pulse-critical" : "border-ink-500/60 bg-ink-700/60 hover:border-ink-500"}
+      className={`group ls-lift ls-sheen relative flex w-full items-center gap-3 rounded-xl border px-3 py-3 text-left
+        ${crit ? "border-critical/60 bg-critical/5 pulse-critical" : "border-ink-500/60 bg-ink-700/60 hover:border-cyan-300/50"}
       `}
     >
       <span className={`absolute left-0 top-3 h-[calc(100%-1.5rem)] w-1 rounded-r ${st.bg}`} />

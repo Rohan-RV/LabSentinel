@@ -36,7 +36,7 @@ export default function FleetGrid({ devices, onOpen }) {
               onClick={() => setFilter(f)}
               className={`rounded-md px-2.5 py-1 text-xs font-medium transition ${
                 filter === f
-                  ? "bg-ink-500 text-slate-100"
+                  ? "bg-gradient-to-r from-cyan-500/25 to-emerald-500/25 text-slate-100 ring-1 ring-cyan-300/40 shadow-[0_0_12px_-4px_rgba(103,232,249,0.8)]"
                   : "text-slate-400 hover:bg-ink-600/60"
               }`}
             >

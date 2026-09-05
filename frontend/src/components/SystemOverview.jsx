@@ -1,13 +1,13 @@
 function Stat({ label, value, sub, accent = "text-slate-100", ring }) {
   return (
-    <div className="flex-1 min-w-[150px] rounded-xl bg-ink-700/70 border border-ink-500/60 px-4 py-3 backdrop-blur">
+    <div className="ls-lift ls-glass flex-1 min-w-[150px] rounded-xl bg-ink-700/70 border border-ink-500/60 px-4 py-3 backdrop-blur">
       <div className="text-[11px] uppercase tracking-wider text-slate-400">{label}</div>
       <div className="mt-1 flex items-baseline gap-2">
         <span className={`text-2xl font-bold ${accent}`}>{value}</span>
         {sub && <span className="text-xs text-slate-400">{sub}</span>}
       </div>
       {ring !== undefined && (
-        <div className="mt-2 h-1.5 w-full rounded-full bg-ink-500/70 overflow-hidden">
+        <div className="ls-shimmer mt-2 h-1.5 w-full rounded-full bg-ink-500/70 overflow-hidden">
           <div
             className="h-full rounded-full transition-all duration-700"
             style={{

@@ -3,6 +3,71 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ---- Theme tokens. Default (no class) = DARK. html.light = LIGHT. ---- */
+:root {
+  --c-ink-900: 10 14 23;
+  --c-ink-800: 15 21 34;
+  --c-ink-700: 22 29 46;
+  --c-ink-600: 30 39 64;
+  --c-ink-500: 42 53 80;
+  --c-slate-100: 229 233 240;
+  --c-slate-200: 226 232 240;
+  --c-slate-300: 203 213 225;
+  --c-slate-400: 148 163 184;
+  --c-slate-500: 100 116 139;
+  --c-cyan-200: 165 243 252;
+  --c-cyan-300: 103 232 249;
+  --c-emerald-300: 110 231 183;
+  --c-violet-300: 196 181 253;
+  --c-amber-300: 252 211 77;
+  --c-amber-400: 251 191 36;
+  --c-orange-300: 253 186 116;
+  --text: #e5e9f0;
+  --text-dim: #94a3b8;
+  --ring-track: #2a3550;
+  --scroll: #2a3550;
+  --body-bg: radial-gradient(1200px 600px at 20% -10%, #16203a 0%, #0a0e17 55%);
+  /* aurora + glass accents (dark) */
+  --aura-1: rgba(56, 189, 248, 0.16);
+  --aura-2: rgba(52, 211, 153, 0.14);
+  --aura-3: rgba(139, 92, 246, 0.13);
+  --glass-top: rgba(255, 255, 255, 0.06);
+  --card-shadow: 0 18px 40px -20px rgba(0, 0, 0, 0.75);
+  --accent-line: linear-gradient(90deg, transparent, rgba(103, 232, 249, 0.7), rgba(52, 211, 153, 0.7), transparent);
+}
+
+:root.light {
+  --c-ink-900: 244 246 248;
+  --c-ink-800: 255 255 255;
+  --c-ink-700: 238 242 246;
+  --c-ink-600: 226 232 239;
+  --c-ink-500: 176 188 202;
+  --c-slate-100: 26 39 51;
+  --c-slate-200: 34 48 60;
+  --c-slate-300: 51 65 79;
+  --c-slate-400: 90 107 120;
+  --c-slate-500: 116 130 145;
+  --c-cyan-200: 14 116 144;
+  --c-cyan-300: 14 116 144;
+  --c-emerald-300: 4 120 87;
+  --c-violet-300: 109 40 217;
+  --c-amber-300: 180 83 9;
+  --c-amber-400: 180 83 9;
+  --c-orange-300: 194 65 12;
+  --text: #1a2733;
+  --text-dim: #5a6b78;
+  --ring-track: #d4dbe3;
+  --scroll: #c2ccd6;
+  --body-bg: radial-gradient(1200px 600px at 20% -10%, #ffffff 0%, #eef2f6 55%);
+  /* aurora + glass accents (light) */
+  --aura-1: rgba(14, 165, 233, 0.10);
+  --aura-2: rgba(16, 185, 129, 0.09);
+  --aura-3: rgba(139, 92, 246, 0.08);
+  --glass-top: rgba(255, 255, 255, 0.55);
+  --card-shadow: 0 18px 34px -22px rgba(30, 50, 80, 0.35);
+  --accent-line: linear-gradient(90deg, transparent, rgba(14, 116, 144, 0.55), rgba(4, 120, 87, 0.55), transparent);
+}
+
 html,
 body,
 #root {
@@ -11,9 +76,29 @@ body,
 
 body {
   margin: 0;
-  background: radial-gradient(1200px 600px at 20% -10%, #16203a 0%, #0a0e17 55%);
-  color: #e5e9f0;
+  background: var(--body-bg);
+  color: var(--text);
   -webkit-font-smoothing: antialiased;
+}
+
+/* Ambient drifting aurora. Sits behind all content, never intercepts clicks. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 42% at 18% 22%, var(--aura-1) 0%, transparent 60%),
+    radial-gradient(34% 38% at 82% 30%, var(--aura-3) 0%, transparent 62%),
+    radial-gradient(46% 46% at 55% 88%, var(--aura-2) 0%, transparent 60%);
+  filter: blur(6px);
+  animation: auraDrift 26s ease-in-out infinite alternate;
+}
+
+#root {
+  position: relative;
+  z-index: 0;
 }
 
 ::-webkit-scrollbar {
@@ -21,13 +106,14 @@ body {
   height: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2a3550;
+  background: var(--scroll);
   border-radius: 6px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 
+/* ---------------- Keyframes ---------------- */
 @keyframes pulseRed {
   0%,
   100% {
@@ -39,4 +125,342 @@ body {
 }
 .pulse-critical {
   animation: pulseRed 1.6s infinite;
+}
+
+@keyframes auraDrift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(2.5%, -2%, 0) scale(1.06);
+  }
+  100% {
+    transform: translate3d(-2%, 2.5%, 0) scale(1.03);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sheenSweep {
+  from {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  to {
+    transform: translateX(220%) skewX(-18deg);
+  }
+}
+
+@keyframes lineFlow {
+  from {
+    background-position: 0% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+
+/* ---------------- Reusable design utilities ---------------- */
+
+/* glass surface: soft top highlight + depth.
+   No overflow:hidden here on purpose, so absolutely-positioned dropdown
+   menus inside a glass container (e.g. the header badges) are not clipped. */
+.ls-glass {
+  position: relative;
+}
+.ls-glass::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  background: var(--glass-top);
+  pointer-events: none;
+}
+
+/* live animated hairline (header underline / accents) */
+.ls-flowline {
+  background: var(--accent-line);
+  background-size: 200% 100%;
+  animation: lineFlow 4.5s linear infinite;
+}
+
+/* hover-lift for interactive cards */
+.ls-lift {
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease, border-color 0.28s ease;
+  will-change: transform;
+}
+.ls-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-shadow);
+}
+
+/* diagonal light sheen that sweeps across on hover */
+.ls-sheen {
+  position: relative;
+  overflow: hidden;
+}
+.ls-sheen::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.10),
+    transparent
+  );
+  transform: translateX(-120%) skewX(-18deg);
+  pointer-events: none;
+  opacity: 0;
+}
+.ls-sheen:hover::before {
+  opacity: 1;
+  animation: sheenSweep 0.9s ease;
+}
+
+/* shimmer overlay for progress bars */
+.ls-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.ls-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: sheenSweep 2.4s ease-in-out infinite;
+}
+
+/* entrance animation with stagger via inline delay */
+.ls-enter {
+  animation: fadeInUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* soft glowing ring around the live/status dot */
+.ls-dot-glow {
+  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.18), 0 0 10px 1px rgba(52, 211, 153, 0.55);
+}
+
+/* ---------------- Theme toggle switch ---------------- */
+.ls-switch {
+  position: relative;
+  width: 58px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid rgb(var(--c-ink-500) / 0.7);
+  background: rgb(var(--c-ink-700) / 0.8);
+  cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease;
+  flex-shrink: 0;
+}
+.ls-switch__knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  line-height: 1;
+  background: linear-gradient(135deg, #fde68a, #fbbf24);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease;
+}
+:root.light .ls-switch__knob {
+  transform: translateX(0);
+  background: linear-gradient(135deg, #fde68a, #fbbf24);
+}
+:root:not(.light) .ls-switch__knob {
+  transform: translateX(30px);
+  background: linear-gradient(135deg, #cbd5e1, #94a3b8);
+}
+
+/* ---------------- Boot splash: shield assembly intro ---------------- */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--body-bg);
+  cursor: pointer;
+  overflow: hidden;
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.intro-overlay.intro-out {
+  opacity: 0;
+  transform: scale(1.04);
+  pointer-events: none;
+}
+
+.intro-lockup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro-shield {
+  position: relative;
+  width: 184px;
+  height: 222px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 14px 34px rgba(52, 211, 153, 0.4));
+}
+
+.intro-half {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: center;
+}
+.intro-half--l {
+  animation: introHalfLeft 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.intro-half--r {
+  animation: introHalfRight 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* the bright seam that flashes at the moment of collision */
+.intro-seam {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  width: 2px;
+  height: 84%;
+  transform: translateX(-50%) scaleY(0.2);
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(255, 255, 255, 0.95),
+    rgba(165, 243, 252, 0.9),
+    transparent
+  );
+  opacity: 0;
+  pointer-events: none;
+  animation: introSeam 0.55s ease 0.72s both;
+}
+
+.intro-name {
+  box-sizing: border-box;
+  max-width: 0;
+  padding-left: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: 800;
+  font-size: 74px;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  background: linear-gradient(90deg, #34d399, #22d3ee);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  opacity: 0;
+  animation: introName 0.75s cubic-bezier(0.22, 1, 0.36, 1) 1.05s both;
+}
+
+@keyframes introHalfLeft {
+  0% {
+    transform: translate(-75vw, -75vh) rotate(-18deg) scale(0.5);
+    opacity: 0;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, 0) rotate(0) scale(1);
+    opacity: 1;
+  }
+}
+@keyframes introHalfRight {
+  0% {
+    transform: translate(75vw, 75vh) rotate(18deg) scale(0.5);
+    opacity: 0;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, 0) rotate(0) scale(1);
+    opacity: 1;
+  }
+}
+@keyframes introSeam {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scaleY(0.2);
+  }
+  40% {
+    opacity: 1;
+    transform: translateX(-50%) scaleY(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scaleY(1);
+  }
+}
+@keyframes introName {
+  0% {
+    max-width: 0;
+    padding-left: 0;
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    max-width: 700px;
+    padding-left: 30px;
+    opacity: 1;
+  }
+}
+
+/* Respect users who prefer less motion. */
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  .ls-flowline,
+  .ls-shimmer::after,
+  .ls-enter,
+  .pulse-critical {
+    animation: none !important;
+  }
+  .ls-lift {
+    transition: none;
+  }
+  /* Splash: skip the fly-in, show the finished lockup, still honor skip/fade. */
+  .intro-half--l,
+  .intro-half--r,
+  .intro-seam {
+    animation: none;
+  }
+  .intro-name {
+    animation: none;
+    max-width: 700px;
+    padding-left: 30px;
+    opacity: 1;
+  }
 }

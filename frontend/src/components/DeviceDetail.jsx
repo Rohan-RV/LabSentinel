@@ -11,6 +11,7 @@ import {
 } from "recharts";
 import { STATUS, PRIORITY, fmtFeature, fmtRul, simulateFailure, resolveDevice, orderParts } from "../api";
 import TwinPanel from "./TwinPanel";
+import Device3DPanel from "./Device3D";
 
 const UNITS = {
   air_temperature: "K",
@@ -274,7 +275,7 @@ export default function DeviceDetail({ device, detail, rulMetrics, onClose }) {
         </div>
 
         <div className="flex gap-1 border-b border-ink-500/60 px-5 pt-3">
-          {["overview", "twin"].map((t) => (
+          {["overview", "twin", "3d"].map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
@@ -282,7 +283,7 @@ export default function DeviceDetail({ device, detail, rulMetrics, onClose }) {
                 tab === t ? "bg-ink-700 text-slate-100" : "text-slate-400 hover:bg-ink-600/50"
               }`}
             >
-              {t === "overview" ? "Overview" : "Digital Twin"}
+              {t === "overview" ? "Overview" : t === "twin" ? "Digital Twin" : "3D Model"}
             </button>
           ))}
         </div>
@@ -428,6 +429,12 @@ export default function DeviceDetail({ device, detail, rulMetrics, onClose }) {
         <div hidden={tab !== "twin"}>
           <TwinPanel device={device} detail={detail} />
         </div>
+
+        {tab === "3d" && (
+          <div className="p-5">
+            <Device3DPanel device={device} />
+          </div>
+        )}
       </div>
     </div>
   );
