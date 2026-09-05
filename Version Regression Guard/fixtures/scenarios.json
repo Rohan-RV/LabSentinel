@@ -1,0 +1,49 @@
+{
+  "instruments": {
+    "SCI-DEV-001": {
+      "name": "SCI-DEV-001 Pressure Analyzer",
+      "arm": "code",
+      "package": "instrument",
+      "entry": "instrument.workflows:run_all_workflows",
+      "criticality": 4,
+      "workflow_modules": {
+        "instrument/measurement.py": "Measurement Workflow",
+        "instrument/experiment.py": "Experiment Workflow",
+        "instrument/qc.py": "QC Workflow"
+      },
+      "versions": {
+        "v2.4": "instruments/SCI-DEV-001/v2.4",
+        "v2.4-clean": "instruments/SCI-DEV-001/v2.4-clean",
+        "v2.5": "instruments/SCI-DEV-001/v2.5"
+      },
+      "samples": [
+        {"id": "S001", "raw_pressure": 98.4, "replicates": 8},
+        {"id": "S002", "raw_pressure": 99.1, "replicates": 8}
+      ],
+      "validations": [
+        {"id": "SCI-DEV-001:v2.4->v2.5", "baseline": "v2.4", "candidate": "v2.5",
+         "title": "v2.5 adaptive-calibration update (expected: regression)"},
+        {"id": "SCI-DEV-001:v2.4->v2.4-clean", "baseline": "v2.4", "candidate": "v2.4-clean",
+         "title": "v2.4.1 maintenance release (expected: safe)"}
+      ]
+    },
+    "QC-MODEL-07": {
+      "name": "QC-MODEL-07 Concentration Model",
+      "arm": "model",
+      "criticality": 5,
+      "consumers": ["QC Workflow", "Reporting Workflow"],
+      "samples_file": "models/QC-MODEL-07/samples.json",
+      "versions": {
+        "v1": "models/QC-MODEL-07/v1",
+        "v2-drift": "models/QC-MODEL-07/v2-drift",
+        "v2-clean": "models/QC-MODEL-07/v2-clean"
+      },
+      "validations": [
+        {"id": "QC-MODEL-07:v1->v2-drift", "baseline": "v1", "candidate": "v2-drift",
+         "title": "Vendor model update (expected: silent drift / regression)"},
+        {"id": "QC-MODEL-07:v1->v2-clean", "baseline": "v1", "candidate": "v2-clean",
+         "title": "Honest model re-train (expected: safe)"}
+      ]
+    }
+  }
+}

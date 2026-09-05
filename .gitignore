@@ -22,4 +22,7 @@ backend/.env
 model/data/logs/
 model/data/ai4i2020.csv
 
+# OS
+.DS_Store
+
 # Keep model/artifacts (trained model + metrics) - small and needed to run.

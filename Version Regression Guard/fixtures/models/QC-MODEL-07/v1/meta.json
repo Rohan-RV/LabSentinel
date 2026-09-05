@@ -1,0 +1,12 @@
+{
+  "model_type": "RandomForestRegressor",
+  "features": [
+    "peak_area_1",
+    "peak_area_2",
+    "peak_area_3",
+    "baseline_noise",
+    "temperature"
+  ],
+  "output": "concentration",
+  "note": "Validated baseline model."
+}

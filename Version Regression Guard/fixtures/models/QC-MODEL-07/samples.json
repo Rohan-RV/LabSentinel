@@ -1,0 +1,131 @@
+{
+  "features": [
+    "peak_area_1",
+    "peak_area_2",
+    "peak_area_3",
+    "baseline_noise",
+    "temperature"
+  ],
+  "samples": [
+    {
+      "id": "S001",
+      "features": {
+        "peak_area_1": 20.577,
+        "peak_area_2": 4.756,
+        "peak_area_3": 8.563,
+        "baseline_noise": 2.251,
+        "temperature": 21.711
+      }
+    },
+    {
+      "id": "S002",
+      "features": {
+        "peak_area_1": 23.038,
+        "peak_area_2": 4.269,
+        "peak_area_3": 7.335,
+        "baseline_noise": 2.733,
+        "temperature": 21.908
+      }
+    },
+    {
+      "id": "S003",
+      "features": {
+        "peak_area_1": 16.148,
+        "peak_area_2": 11.793,
+        "peak_area_3": 6.155,
+        "baseline_noise": 1.915,
+        "temperature": 24.825
+      }
+    },
+    {
+      "id": "S004",
+      "features": {
+        "peak_area_1": 10.776,
+        "peak_area_2": 2.661,
+        "peak_area_3": 2.244,
+        "baseline_noise": 0.879,
+        "temperature": 27.287
+      }
+    },
+    {
+      "id": "S005",
+      "features": {
+        "peak_area_1": 14.892,
+        "peak_area_2": 4.539,
+        "peak_area_3": 5.194,
+        "baseline_noise": 1.216,
+        "temperature": 24.438
+      }
+    },
+    {
+      "id": "S006",
+      "features": {
+        "peak_area_1": 18.431,
+        "peak_area_2": 6.775,
+        "peak_area_3": 4.433,
+        "baseline_noise": 1.696,
+        "temperature": 20.511
+      }
+    },
+    {
+      "id": "S007",
+      "features": {
+        "peak_area_1": 13.12,
+        "peak_area_2": 14.035,
+        "peak_area_3": 11.328,
+        "baseline_noise": 0.411,
+        "temperature": 25.731
+      }
+    },
+    {
+      "id": "S008",
+      "features": {
+        "peak_area_1": 17.546,
+        "peak_area_2": 13.373,
+        "peak_area_3": 11.488,
+        "baseline_noise": 0.933,
+        "temperature": 21.71
+      }
+    },
+    {
+      "id": "S009",
+      "features": {
+        "peak_area_1": 17.472,
+        "peak_area_2": 15.566,
+        "peak_area_3": 11.608,
+        "baseline_noise": 1.571,
+        "temperature": 20.969
+      }
+    },
+    {
+      "id": "S010",
+      "features": {
+        "peak_area_1": 24.086,
+        "peak_area_2": 15.063,
+        "peak_area_3": 6.721,
+        "baseline_noise": 0.096,
+        "temperature": 27.6
+      }
+    },
+    {
+      "id": "S011",
+      "features": {
+        "peak_area_1": 8.966,
+        "peak_area_2": 13.499,
+        "peak_area_3": 7.585,
+        "baseline_noise": 2.584,
+        "temperature": 24.106
+      }
+    },
+    {
+      "id": "S012",
+      "features": {
+        "peak_area_1": 14.768,
+        "peak_area_2": 11.743,
+        "peak_area_3": 10.694,
+        "baseline_noise": 2.551,
+        "temperature": 21.766
+      }
+    }
+  ]
+}
